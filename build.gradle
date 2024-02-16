@@ -1,0 +1,31 @@
+
+// 라이브러리 자동 빌드 시스템 ---------------------------------------- //
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.2'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies { // 여기에 외부 라이브러리 설치 코드를 넣어라
+	implementation 'org.springframework.boot:spring-boot-starter-web' // spring web
+	testImplementation 'org.springframework.boot:spring-boot-starter-test' // spring web test
+	runtimeOnly 'com.mysql:mysql-connector-j' // MYSQL 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-mustache' // Mustache : 화면 뷰
+	compileOnly 'org.projectlombok:lombok' // Lombok
+	annotationProcessor 'org.projectlombok:lombok' // Lombok
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

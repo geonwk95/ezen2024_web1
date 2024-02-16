@@ -1,0 +1,12 @@
+p.641 List
+p.647 LinkedList
+p.650 Set
+p.656 Map
+p.664 Tree 이진트리 : p.665 TreeSet p.668 TreeMap
+p.676 Stack/Queue
+
+* 상황에 따라 적합한 데이터를 구조화 할수 있다.
+* 안써도 문제 없음. 하지만 사용한다면 효율적인 제공
+
+
+

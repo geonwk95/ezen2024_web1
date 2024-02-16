@@ -1,0 +1,65 @@
+JDK : 자바 개발도구 ( javac 포함 , jar 포함 )
+라이브러리 : (도구) 클래스/인터페이스 모임.
+프레임워크 : (틀) 프로그램 개발하기 위해 틀을 제공하는 프로그램.
+
+SPRING       : 자바를 이용한 라이브러리 들의 집합들로 만든 프레임워크    
+SPRINB BOOT   : SPRING 간소화 설정            vs  NODE.JS
+   - spring webapps
+   - spring Batch
+
+스프링프로젝트 X , 그레이들 프로젝트O
+
+
+1. 프로젝트 준비
+	Project : Gradle-Groovy
+		Gradle : 빌드 관리 도구	VS	Maven
+		- 외부라이브러리들을 설치하고 관리해주는 시스템
+	Language : java
+	spring boot : 3.x	[ 추후에 변경 가능 ] 
+	packaging : jar
+	java : 17 ( springboot 3.x 이상 )
+
+2. 프로젝트 메타데이터/정보
+	Artifact : 홈페이지 명
+	Package name : 홈페이지 HTTP 주소를 반대로 ( ezen.com / com -> ezen )
+
+3. 외부라이브러르 추가 Dependencles
+	1. Spring Web
+	2. H2 Database	:( 테스트/간단한개발/영구저장X ) db서버없이 웹서버로 db사용 데이터베이스 제공 <----> MYSQL
+☆☆☆☆ 	3. Mustache	: 화면구현( 템플릿엔진 )
+		템플릿엔진 : 1. JSP 2. ☆Mustache(머스테치) 3. Thymeleaf(타임리프) 4. ☆React.js 5. Vue.js
+	4. Spring data JPA : RDBMS를 JAVA객체지향으로 매핑하는 도구 ( SQL 자동화 )
+
+4. 프로젝트 파일 구조
+	.idea			: 인텔리제이 설정 파일
+	gradel			: 그레이들(빌드) 실행 도구
+☆☆☆☆	src			: 코드 소스파일
+	-main
+	 --java			: 자바 소스파일
+	  --- 패키지
+	 --resources 		: 프로젝트설정파일 , 정적( html,css,js,img등등 )파일
+	  --- static		: HTML , CSS , JS , IMG 등등
+	  --- templates		: 템플릿 ( JSP , ☆Mustache , Thymeleaf 등등 )
+              --- application.properties	: 프로젝트 설정 파일
+	-test			: 테스트 소스파일
+	gitignore			: git 커밋 무시할 파일
+☆☆☆☆	build.gradle		: 프로젝트에 등록할 라이브러리 코드 작성파일
+	외부라이브러리 		: JDK17 , 스프링부트 관련 클래스틀
+
+5. 프로젝트 실행 
+   - 톰캣(was : 자바 웹서버 프로그램 )  내장 서버 , 기본port : 8080
+   application.properties 파일 
+      - server.port = 사용할 포트명
+
+- ip	: 네트워크를 사용하는 pc의 식별번호
+- port	: 컴퓨터 내에서 프로그램들의 식별번호
+	3306 : MYSQL
+	
+
+
+
+
+
+	
+
+
