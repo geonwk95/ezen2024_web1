@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+
 @Controller
 public class MemberController {
 
@@ -26,25 +28,25 @@ public class MemberController {
     // 1. ============ 회원가입 처리 요청 ============
     @PostMapping("/member/signup") // http://localhost:1002/member/signup
     @ResponseBody // 응답 방식
-    public String doPostsignup( MemberDto memberDto ){
+    public boolean doPostsignup( MemberDto memberDto ){
         System.out.println("MemberController.signup");
         System.out.println("memberDto = " + memberDto);
 
         // --
-        MemberDto result = memberDao.doPostsignup( memberDto ); // Dao 처리
+        boolean result = memberDao.doPostsignup( memberDto ); // Dao 처리
 
-        return "redirect:/member/login"; // Dao 요청후 응답 결과물 보내기
+        return result; // Dao 요청후 응답 결과물 보내기
     }
     // 2. ============ 로그인 처리 요청 ============
     @PostMapping("/member/login") // http://localhost:1002/member/login
     @ResponseBody // 응답 방식
-    public String doPostlogin( LoginDto loginDto ){
+    public LoginDto doPostlogin( LoginDto loginDto ){
         System.out.println("MemberController.login");
         System.out.println("loginDto = " + loginDto);
 
-        // --
-        boolean result = memberDao.doPostlogin(loginDto); // Dao 처리
-
+        LoginDto result = memberDao.doPostlogin( loginDto );
+        System.out.println("MemberController.doPostlogin");
+        System.out.println("result = " + result);
         return result; // Dao 요청후 응답 결과물 보내기
     }
 
@@ -96,6 +98,18 @@ public class MemberController {
         return "redirect:/ezenweb/login";
     }
 
+    // 8. ============ 전체 회원페이지 요청 ============
+    @GetMapping("/member")
+    public String index(Model model){
+        System.out.println("MemberController.index");
+        System.out.println("model = " + model);
+
+        ArrayList<MemberDto> list = memberDao.index();
+        System.out.println("list = " + list);
+        model.addAttribute("articleList" , list);
+
+        return "ezenweb/index";
+    }
 
 
 

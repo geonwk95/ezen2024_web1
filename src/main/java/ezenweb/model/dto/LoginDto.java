@@ -10,6 +10,4 @@ public class LoginDto {
     private int no;
     private String id;
     private String pw;
-
-
 }

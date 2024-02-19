@@ -35,7 +35,6 @@ function signup(){
                 console.log(result);
             }
         })
-
 }
 
 // 2. 로그인
@@ -57,7 +56,9 @@ function login(){
        success : function ( result ){ // 무엇을받을지 , 통신 응답 결과 받기
             console.log(result);
             // 4. 결과
-            if( result ){ alert('로그인 성공'); }
+            if( result["no"] != 0 ){ alert('로그인 성공');
+            location.href = "/member"
+            }
             else{ alert('로그인 실패'); }
        }
     }) // ajax end

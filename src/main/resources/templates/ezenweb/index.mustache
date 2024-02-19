@@ -1,28 +1,40 @@
-{{>layouts/header}}
-<table border="1" >
-    <thead>
-    <tr>
-        <th> ID </th>
-        <th> PW </th>
-        <th> Name </th>
-        <th> Email </th>
-        <th> Phone </th>
-        <th> Img </th>
-    </tr>
-    </thead>
-    <tbody>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
 
-        <tr>
-            <td> {{ id }} </td>
-            <td> {{ pw }}  </td>
-            <td> {{ name }} </td>
-            <td> {{ email }} </td>
-            <td> {{ phone }} </td>
-            <td> {{ img }} </td>
-        </tr>
+        <h1>전체 회원정보 페이지</h1>
+        <table border="1" >
+            <thead>
+            <tr>
+                <th> NO </th>
+                <th> ID </th>
+                <th> PW </th>
+                <th> NAME </th>
+                <th> EMAIL </th>
+                <th> PHONE </th>
+                <th> IMG </th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#articleList}}
+                <tr>
+                    <td> {{ no }} </td>
+                    <td> {{ id }} </td>
+                    <td> {{ pw }} </td>
+                    <td> {{ name }} </td>
+                    <td> {{ email }} </td>
+                    <td> {{ phone }} </td>
+                    <td> {{ img }} </td>
+                </tr>
+            {{/articleList}}
+            </tbody>
+        </table>
 
-    </tbody>
-</table>
-
-
-{{>layouts/footer}}
+</body>
+</html>

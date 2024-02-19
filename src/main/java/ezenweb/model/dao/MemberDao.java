@@ -5,6 +5,7 @@ import ezenweb.model.dto.MemberDto;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 @Component
 public class MemberDao {
@@ -35,13 +36,15 @@ public class MemberDao {
 
     }
     // -------------------- DB 연동 e ------------------------ //
-    public MemberDto doPostsignup(MemberDto memberDto) {
+
+    // ================ 회원가입 ================ //
+    public boolean doPostsignup(MemberDto memberDto) {
         // 세이브 성공시 반환할 Dto
         MemberDto saved = new MemberDto();
         try {
             String sql = "insert into member( id , pw , name , email , phone , img ) values( ? , ? , ? , ? , ? , ? )";
 
-            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps = conn.prepareStatement(sql);
 
             ps.setString(1, memberDto.getId());
             ps.setString(2, memberDto.getPw());
@@ -50,53 +53,42 @@ public class MemberDao {
             ps.setString(5, memberDto.getPhone());
             ps.setString(6, memberDto.getImg());
 
-
             int count = ps.executeUpdate();
-            rs = ps.getGeneratedKeys();
-            if (rs.next()) {
 
-                int no = rs.getInt(1);
-                saved.setNo(no);
-                saved.setId(memberDto.getId());
-                saved.setPw(memberDto.getPw());
-                saved.setName(memberDto.getName());
-                saved.setEmail(memberDto.getEmail());
-                saved.setPhone(memberDto.getPhone());
-                saved.setImg(memberDto.getImg());
-                return saved;
+            if (count == 1) {
+                return true;
             }
 
         } catch (Exception e) {
             System.out.println("e = " + e);
         }
-        return saved;
+        return false;
 
 
     }
 
+    // ================ 로그인 ================ //
     public LoginDto doPostlogin( LoginDto loginDto ){
         LoginDto result = new LoginDto();
 
         try {
-            String sql = "select id , pw from member where no = ?";
+            String sql = "select * from member where id = ? and pw = ?";
 
-            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps = conn.prepareStatement(sql);
 
-            ps.setInt(1 , loginDto.getNo() );
+            ps.setString(1 , loginDto.getId() );
+            ps.setString(2 , loginDto.getPw() );
 
-            ps.executeQuery();
-
-            rs = ps.getGeneratedKeys();
-
+            rs = ps.executeQuery();
 
             if ( rs.next() ){
-                System.out.println("방금 자동으로 생성된 pk(id) : " + rs.getInt(1) );
                 int no = rs.getInt(1);
-                loginDto.setId( loginDto.getId() );
-                loginDto.setPw( loginDto.getPw() );
+                result.setNo( rs.getInt( no ) );
+                result.setId( loginDto.getId() );
+                result.setPw( loginDto.getPw() );
+
                 return result;
             }
-
 
         }catch ( Exception e ){
             System.out.println("e = " + e);
@@ -105,6 +97,32 @@ public class MemberDao {
     }
 
 
+    public ArrayList<MemberDto> index(){
+        ArrayList<MemberDto> list = new ArrayList<>();
+        try {
+            String sql = "select * from member";
+
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while ( rs.next() ){
+                // 1. 객체 만들기
+                MemberDto memberDto = new MemberDto(
+                rs.getInt(1) ,
+                rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7)
+                );
+                // 2. 객체를 리스트에 넣기
+                list.add( memberDto );
+            }
+
+        }catch ( Exception e ){
+            System.out.println("e = " + e);
+        }
+        return list;
+    }
+
 }
- /*
-    }*/
