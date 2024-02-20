@@ -24,7 +24,7 @@ function signup(){
             url : '/member/signup' ,
             method : 'POST' ,
             data : info ,
-            success : function result( result ){
+            success : function ( result ){
             // 4. 결과
             if( result ){
                     alert('회원가입 성공');
