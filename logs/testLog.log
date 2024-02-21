@@ -1111,3 +1111,73 @@ Identify and stop the process that's listening on port 1002 or configure this ap
 2024-02-21T16:02:20.822+09:00  INFO 10248 --- [http-nio-1002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2024-02-21T16:02:20.822+09:00  INFO 10248 --- [http-nio-1002-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2024-02-21T16:02:20.822+09:00  INFO 10248 --- [http-nio-1002-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-02-21T17:15:21.870+09:00  INFO 13060 --- [main] example.day08.BoardApplication           : Starting BoardApplication using Java 17.0.9 with PID 13060 (C:\Users\504\Desktop\ezen2024_web1\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2024_web1)
+2024-02-21T17:15:21.872+09:00  INFO 13060 --- [main] example.day08.BoardApplication           : No active profile set, falling back to 1 default profile: "default"
+2024-02-21T17:15:22.535+09:00  INFO 13060 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 1002 (http)
+2024-02-21T17:15:22.544+09:00  INFO 13060 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-21T17:15:22.544+09:00  INFO 13060 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-02-21T17:15:22.590+09:00  INFO 13060 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-21T17:15:22.590+09:00  INFO 13060 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 687 ms
+2024-02-21T17:15:23.019+09:00  INFO 13060 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 1002 (http) with context path ''
+2024-02-21T17:15:23.026+09:00  INFO 13060 --- [main] example.day08.BoardApplication           : Started BoardApplication in 1.437 seconds (process running for 1.646)
+2024-02-21T17:15:27.375+09:00  INFO 13060 --- [http-nio-1002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-21T17:15:27.376+09:00  INFO 13060 --- [http-nio-1002-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-21T17:15:27.376+09:00  INFO 13060 --- [http-nio-1002-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-02-21T17:16:02.031+09:00  INFO 3204 --- [main] example.day08.BoardApplication           : Starting BoardApplication using Java 17.0.9 with PID 3204 (C:\Users\504\Desktop\ezen2024_web1\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2024_web1)
+2024-02-21T17:16:02.033+09:00  INFO 3204 --- [main] example.day08.BoardApplication           : No active profile set, falling back to 1 default profile: "default"
+2024-02-21T17:16:02.719+09:00  INFO 3204 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 1002 (http)
+2024-02-21T17:16:02.728+09:00  INFO 3204 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-21T17:16:02.728+09:00  INFO 3204 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-02-21T17:16:02.774+09:00  INFO 3204 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-21T17:16:02.774+09:00  INFO 3204 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 708 ms
+2024-02-21T17:16:03.194+09:00  INFO 3204 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 1002 (http) with context path ''
+2024-02-21T17:16:03.200+09:00  INFO 3204 --- [main] example.day08.BoardApplication           : Started BoardApplication in 1.451 seconds (process running for 1.669)
+2024-02-21T17:16:30.912+09:00  INFO 3204 --- [http-nio-1002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-21T17:16:30.912+09:00  INFO 3204 --- [http-nio-1002-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-21T17:16:30.913+09:00  INFO 3204 --- [http-nio-1002-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-02-21T17:17:39.761+09:00  INFO 4704 --- [main] example.day08.BoardApplication           : Starting BoardApplication using Java 17.0.9 with PID 4704 (C:\Users\504\Desktop\ezen2024_web1\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2024_web1)
+2024-02-21T17:17:39.763+09:00  INFO 4704 --- [main] example.day08.BoardApplication           : No active profile set, falling back to 1 default profile: "default"
+2024-02-21T17:17:40.467+09:00  INFO 4704 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 1002 (http)
+2024-02-21T17:17:40.476+09:00  INFO 4704 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-21T17:17:40.477+09:00  INFO 4704 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-02-21T17:17:40.525+09:00  INFO 4704 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-21T17:17:40.525+09:00  INFO 4704 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 727 ms
+2024-02-21T17:17:40.965+09:00  INFO 4704 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 1002 (http) with context path ''
+2024-02-21T17:17:40.973+09:00  INFO 4704 --- [main] example.day08.BoardApplication           : Started BoardApplication in 1.508 seconds (process running for 1.725)
+2024-02-21T17:17:58.077+09:00  INFO 6256 --- [main] example.day09._3인과제.EmpoployeAppStart    : Starting EmpoployeAppStart using Java 17.0.9 with PID 6256 (C:\Users\504\Desktop\ezen2024_web1\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2024_web1)
+2024-02-21T17:17:58.079+09:00  INFO 6256 --- [main] example.day09._3인과제.EmpoployeAppStart    : No active profile set, falling back to 1 default profile: "default"
+2024-02-21T17:17:58.812+09:00  INFO 6256 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 1002 (http)
+2024-02-21T17:17:58.821+09:00  INFO 6256 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-21T17:17:58.822+09:00  INFO 6256 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-02-21T17:17:58.870+09:00  INFO 6256 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-21T17:17:58.870+09:00  INFO 6256 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 758 ms
+2024-02-21T17:17:59.335+09:00  WARN 6256 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2024-02-21T17:17:59.346+09:00  INFO 6256 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-02-21T17:17:59.362+09:00 ERROR 6256 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 1002 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 1002 or configure this application to listen on another port.
+
+2024-02-21T17:18:27.627+09:00  INFO 8704 --- [main] example.day09._3인과제.EmpoployeAppStart    : Starting EmpoployeAppStart using Java 17.0.9 with PID 8704 (C:\Users\504\Desktop\ezen2024_web1\build\classes\java\main started by 504 in C:\Users\504\Desktop\ezen2024_web1)
+2024-02-21T17:18:27.629+09:00  INFO 8704 --- [main] example.day09._3인과제.EmpoployeAppStart    : No active profile set, falling back to 1 default profile: "default"
+2024-02-21T17:18:28.307+09:00  INFO 8704 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 1002 (http)
+2024-02-21T17:18:28.316+09:00  INFO 8704 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-21T17:18:28.316+09:00  INFO 8704 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-02-21T17:18:28.362+09:00  INFO 8704 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-21T17:18:28.363+09:00  INFO 8704 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 702 ms
+2024-02-21T17:18:28.797+09:00  INFO 8704 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 1002 (http) with context path ''
+2024-02-21T17:18:28.803+09:00  INFO 8704 --- [main] example.day09._3인과제.EmpoployeAppStart    : Started EmpoployeAppStart in 1.453 seconds (process running for 1.659)
+2024-02-21T17:18:34.292+09:00  INFO 8704 --- [http-nio-1002-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-21T17:18:34.293+09:00  INFO 8704 --- [http-nio-1002-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-21T17:18:34.293+09:00  INFO 8704 --- [http-nio-1002-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms

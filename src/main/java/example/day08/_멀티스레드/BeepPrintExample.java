@@ -1,4 +1,4 @@
-package example.day08;
+package example.day08._멀티스레드;
 
 import java.awt.*;
 

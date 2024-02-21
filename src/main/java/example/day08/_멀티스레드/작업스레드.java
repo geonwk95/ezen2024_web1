@@ -1,8 +1,10 @@
-package example.day08;
+package example.day08._멀티스레드;
 
 import java.awt.*;
-                    // extends : 하나의 클래스만 가능
-public class 작업스레드2 extends Thread{
+                    // implements : 여러개 인터페이스
+public class 작업스레드 implements Runnable{
+
+    // 작업스레드가 최초 실행하는 함수
     @Override
     public void run() {
         for ( int i = 1 ; i <= 5 ; i++){

@@ -104,10 +104,20 @@ function point(eno){
                // 2. 무엇을
                let html = "";
                html += `
-               <h3>${name}</h3><br/>
+               <h3>사원 : ${name}</h3><br/>
                사유 : <input id="preason" value=""/>  <br/>
                점수 : <input id="ppoint" value=""/> <br/>
                <button onclick="pointCreate(${eno})"> 등록 </button>
+                <table border="1px" margin = "10 10 10px 10" width = "610px">
+                <thead>
+                <tr>
+                <th width = "200px"> 사유 </th> <th width = "100px"> 점수 </th> <th width = "300px"> 시간 </th>
+                </tr>
+                </thead>
+                <tbody id="tpoint2">
+
+                </tbody>
+                </table>
                `
                // 출력
                pointDiv.innerHTML = html;
@@ -158,13 +168,14 @@ function pointview(eno){
                         console.log( "결과ㅣ"+ result[i].preason );
                         // 백틱 ` : 키보드 tab키 위에 있는 키 // ``백틱 문자열 사이에 ${ JS코드 } 대입하는 템플릿
 
-                    html1 += `<table border = "1px">
-                        <tbody>
+                    html1 += `
+
+                        <tr>
                         <th> ${ result[i].preason }  </th>
                         <th> ${ result[i].ppoint }  </th>
                         <th> ${ result[i].pdate }  </th>
-                        <tbody/>
-                     </table>`
+                        <tr>
+                        `
                     };
                     // 3. 출력
                     tbody1.innerHTML = html1;
@@ -196,4 +207,3 @@ function pointCreate(eno){
            }
         }) // ajax end
 }
-
