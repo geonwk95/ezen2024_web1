@@ -1,60 +1,30 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Title</title>
 </head>
 <body>
 
-    <h1> 비회원 방문록 </h1>
-    내용 : <input />
-    작성자 : <input />
-    비밀번호 : <input />
-    <button onclick="doCreate()"> 등록 </button>
+<h1> 비회원 방문록 </h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th> 번호 </th>
-                <th> 내용 </th>
-                <th> 작성자 </th>
-                <th> 비고 </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td> 1 </td>
-                <td> 하이하이 </td>
-                <td> 김건우 </td>
-                <td>
-                     <button onclick="doDelete()">삭제</button>
-                     <button onclick="doUpdate()">수정</button>
-                </td>
-            </tr>
-            <tr>
-                <td> 2 </td>
-                <td> 하이하이 </td>
-                <td> 김건우 </td>
-                <td> <button>삭제</button> <button>수정</button></td>
-            </tr>
-            <tr>
-                <td> 3 </td>
-                <td> 하이하이 </td>
-                <td> 김건우 </td>
-                <td> <button>삭제</button> <button>수정</button></td>
-            </tr>
-            <tr>
-                <td> 4 </td>
-                <td> 하이하이 </td>
-                <td> 김건우 </td>
-                <td> <button>삭제</button> <button>수정</button></td>
-            </tr>
-        </tbody>
-    </table>
+내용 : <input id="bcontent" value=""/>  <br/>
+작성자 : <input id="bwriter" value=""/>   <br/>
+비밀번호 : <input id="bpassword" value="" />  <br/>
+<button onclick="doCreate()"> 등록 </button>
 
-    <script src="/js/day08Board.js"></script>
+<table>
+    <thead>
+    <tr>
+        <th> 번호 </th> <th> 내용 </th> <th> 작성자 </th> <th> 비고 </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/js/day08Board.js"></script>
 
 </body>
 </html>
