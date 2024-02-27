@@ -1,55 +1,62 @@
 {{>ezenweb/header}}
 
     <h1>회원가입 페이지</h1>
-
+<form class="signUpForm">
     <table>
+
         <tbody>
         <tr>
             <th>아이디    </th>
 
         <td>
-            <input type="text" id="id"/> <br/>
+            <input type="text" id="id" name="id"/> <br/>
         </td>
         </tr>
         <tr>
             <th><label>비밀번호 </label></th>
         <td>
-            <input type="text" id="pw"/> <br/>
+            <input type="text" id="pw" name="pw"/> <br/>
         </td>
         </tr>
         <tr>
             <th>비밀번호확인   </th>
 
             <td>
-                <input type="text" id="pwconfirm"/> <br/>
+                <input type="text" id="pwconfirm" name="pwconfirm"/> <br/>
             </td>
         </tr>
         <tr>
             <th>이름  </th>
 
             <td>
-                <input type="text" id="name"/> <br/>
+                <input type="text" id="name" name="name"/> <br/>
             </td>
         </tr>
         <tr>
             <th>전화번호  </th>
 
             <td>
-                <input type="text" id="phone"/> <br/>
+                <input type="text" id="phone" name="phone"/> <br/>
             </td>
         </tr>
         <tr>
             <th>이메일  </th>
 
             <td>
-                <input type="text" id="email"/> <br/>
+                <input type="text" id="email" name="email"/> <br/>
             </td>
         </tr>
         <tr>
             <th>프로필 사진  </th>
 
             <td>
-                <input type="text" id="img"/> <br/>
+                <input onchange="onChangeImg( this )" type="file" id="img" name="img" accept="image/*" /> <br/>
+            </td>
+        </tr>
+        <tr>
+            <th>미리보기</th>
+            <td>
+                <img id="preimg" src="/img/default.jpg" />
             </td>
         </tr>
         <tr>
@@ -60,7 +67,7 @@
         </tr>
         </tbody>
     </table>
-
+</form>
 
     <script src="/js/member.js"></script>
     <!-- {resources/static}생략 /js/member.js -->

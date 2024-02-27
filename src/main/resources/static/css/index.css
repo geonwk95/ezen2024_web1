@@ -24,6 +24,7 @@
     margin: 0;
     list-style-type: none; /* 글머리 */
     background-color: white;
+    font-family: 'TTHakgyoansimJiugaeR';
 }
 /* 헤더 로고 이미지 */
 #head_logo > img{
@@ -42,9 +43,9 @@
     width: 800px;
     
 }
+
 #main_menu{
     display: flex;
-    font-family: 'TTHakgyoansimJiugaeR';
     color: cadetblue;
 }
 #main_menu > li{
@@ -52,8 +53,14 @@
 }
 #login_menu{
     display: flex;
-    font-family: 'TTHakgyoansimJiugaeR';
+    align-items: center;
+    
 }
 #login_menu > li{
     margin: 0 30;
 }
+
+#user_img{
+    width: 80px;
+}
+

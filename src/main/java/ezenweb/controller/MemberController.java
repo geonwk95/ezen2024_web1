@@ -1,5 +1,6 @@
 package ezenweb.controller;
 
+import ezenweb.Service.MemberService;
 import ezenweb.model.dao.MemberDao;
 import ezenweb.model.dto.LoginDto;
 import ezenweb.model.dto.MemberDto;
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.UUID;
 
 @Controller
 public class MemberController {
@@ -26,8 +30,10 @@ public class MemberController {
     // 1단계. V <-------> C 사이의 HTTP 통신 방식 설계
     // 2단계. Controller mapping 함수 선언 하고 통신 체크 ( API Tester )
     // 3단계. Controller request 매개변수 매핑
-        // --------------------- Dto , Service --------------------- //
+    // --------------------- Dto , Service --------------------- //
     // 4단계. 응답 : 1. 뷰 반환 :  text/html;  VS  2. 데이터/값 : @ResponseBody : Application/JSON
+    @Autowired
+    private MemberService memberService;
 
     // 1. ============ 회원가입 처리 요청 ============
     @PostMapping("/member/signup") // http://localhost:1002/member/signup
@@ -36,10 +42,7 @@ public class MemberController {
         System.out.println("MemberController.signup");
         System.out.println("memberDto = " + memberDto);
 
-        // --
-        boolean result = memberDao.doPostsignup( memberDto ); // Dao 처리
-
-        return result; // Dao 요청후 응답 결과물 보내기
+        return memberService.doPostsignup( memberDto ); // Dao 요청후 응답 결과물 보내기
     }
 
 
@@ -62,6 +65,9 @@ public class MemberController {
             // - Http 세션 초기화        .invalidate();
 
     if ( result ){
+
+        // 세션에 저장할 내용물들을 구성( 주로 식별키만 )
+
         request.getSession().setAttribute("loginDto" , loginDto.getId());
     }
         return result; // Dao 요청후 응답 결과물 보내기
@@ -96,6 +102,13 @@ public class MemberController {
         // 로그아웃 성공시 => 메인페이지 또는 로그인페이지 이동
     }
 
+    // 3 ============ 회원정보 요청 ( 로그인된 회원 요청 ) ============
+    @GetMapping("/member/login/info")
+    @ResponseBody
+    public MemberDto doGetLoginInfo( String id ){
+
+        return memberService.doGetLoginInfo( id );
+    }
 
     // 3. ============ 회원가입 페이지 요청 ============
     @GetMapping("/member/signup")
@@ -146,7 +159,7 @@ public class MemberController {
     }
 
     // 8. ============ 전체 회원페이지 요청 ============
-    @GetMapping("/member")
+    /*@GetMapping("/member")
     public String index(Model model){
         System.out.println("MemberController.index");
         System.out.println("model = " + model);
@@ -156,7 +169,7 @@ public class MemberController {
         model.addAttribute("articleList" , list);
 
         return "ezenweb/index";
-    }
+    }*/
 
 
 
