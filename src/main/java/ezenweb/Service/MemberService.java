@@ -4,6 +4,9 @@ import ezenweb.model.dao.MemberDao;
 import ezenweb.model.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Service
 public class MemberService {
@@ -11,7 +14,8 @@ public class MemberService {
     private FileService fileService; // 외부 서비스
     @Autowired
     private MemberDao memberDao;
-
+    @Autowired
+    private EmailService emailService;
     // 1. 회원가입 서비스
     public boolean doPostsignup(MemberDto memberDto) {
         /*
@@ -34,7 +38,12 @@ public class MemberService {
         // 2. DB 처리
         // dto에 업로드 성공한 파일명을 대입한다
         memberDto.setUuidFile(fileName);
-        return memberDao.doPostsignup(memberDto);
+        // * 이메일 테스트
+        boolean result = memberDao.doPostsignup( memberDto );
+        if ( result ){
+            emailService.send();
+        }
+        return result;
     } // e
 
 
@@ -42,8 +51,13 @@ public class MemberService {
 
     // 3. 회원정보 요청 서비스
     public MemberDto doGetLoginInfo(String id) {
-        // 1. Dao 호출
+        // 1. Dao doGetLoginInfo 호출
         return memberDao.doGetLoginInfo(id);
+    }
+    // 4 ============ 아이디 중복 체크 요청 ============
+    public boolean doGetFindIdCheck(@RequestParam String id){
+        // 1. Dao doGetFindIdCheck 호출
+        return memberDao.doGetFindIdCheck( id );
     }
 
 }

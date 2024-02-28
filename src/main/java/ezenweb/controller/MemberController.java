@@ -9,10 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -109,6 +106,14 @@ public class MemberController {
 
         return memberService.doGetLoginInfo( id );
     }
+    // 4 ============ 아이디 중복 체크 요청 ============
+    @GetMapping("/member/find/idcheck")
+    @ResponseBody
+    public boolean doGetFindIdCheck(@RequestParam String id){
+        System.out.println("MemberController.doGetFindIdCheck");
+        System.out.println("id = " + id);
+        return memberService.doGetFindIdCheck( id );
+    }
 
     // 3. ============ 회원가입 페이지 요청 ============
     @GetMapping("/member/signup")
@@ -127,7 +132,9 @@ public class MemberController {
         return "ezenweb/login";
     }
 
-    // 5. ============ 회원수정 처리 요청 ============
+
+
+    /*// 5. ============ 회원수정 처리 요청 ============
     @PostMapping("/member/update")
     @ResponseBody
     public boolean doPostupdate(UpdateDto updateDto){
@@ -156,7 +163,7 @@ public class MemberController {
 
 
         return "redirect:/ezenweb/login";
-    }
+    }*/
 
     // 8. ============ 전체 회원페이지 요청 ============
     /*@GetMapping("/member")

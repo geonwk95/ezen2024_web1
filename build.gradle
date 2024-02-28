@@ -24,6 +24,7 @@ dependencies { // 여기에 외부 라이브러리 설치 코드를 넣어라
 	implementation 'org.springframework.boot:spring-boot-starter-mustache' // Mustache : 화면 뷰
 	compileOnly 'org.projectlombok:lombok' // Lombok
 	annotationProcessor 'org.projectlombok:lombok' // Lombok
+	implementation 'org.springframework.boot:spring-boot-starter-mail' // Java Email Sender
 }
 
 tasks.named('test') {

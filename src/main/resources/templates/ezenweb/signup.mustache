@@ -1,75 +1,34 @@
 {{>ezenweb/header}}
-
-    <h1>회원가입 페이지</h1>
+<h1> 회원가입 페이지 </h1>
 <form class="signUpForm">
-    <table>
+    <!--    <div>-->
+    <div> 아이디 </div>
+      <input onkeyup="idCheck()"  type="text" id="id" name="id" /> <br/>
+      <div class="idCheckbox"></div>
+    <div> 비밀번호 </div>
+    <input onkeyup="pwcheck()" type="text" id="pw" name="pw" /> <br/>
+    <div> 비밀번호 확인 </div> 
+    <input onkeyup="pwcheck()"type="text" id="pwconfirm" name="pwconfirm"/> <br/>
+    <div class="pwcheckbox"></div>
+    <div> 이름 </div>
+    <input onkeyup="namecheck()" type="text" id="name" name="name"/> <br/>
+    <div class="namecheckbox"></div>
+    <div> 전화번호 </div>
+    <input onkeyup="phonecheck()" type="text" id="phone" name="phone" /> <br/>
+    <div class="phonecheckbox"></div>
+    <div> 이메일 </div>
+    <input onkeyup="emailcheck()" type="text" id="email" name="email" /> <br/>
+    <div class="emailcheckbox"></div>
+    <div> 프로필 사진 </div>
+    <input onchange="onChangeImg( this )" type="file" id="img"
+           name="img" accept="image/*" /> <br/>
+    <div> 미리보기 </div>
+    <div>    <img id="preimg" src="/img/default.jpg" />   </div>
 
-        <tbody>
-        <tr>
-            <th>아이디    </th>
-
-        <td>
-            <input type="text" id="id" name="id"/> <br/>
-        </td>
-        </tr>
-        <tr>
-            <th><label>비밀번호 </label></th>
-        <td>
-            <input type="text" id="pw" name="pw"/> <br/>
-        </td>
-        </tr>
-        <tr>
-            <th>비밀번호확인   </th>
-
-            <td>
-                <input type="text" id="pwconfirm" name="pwconfirm"/> <br/>
-            </td>
-        </tr>
-        <tr>
-            <th>이름  </th>
-
-            <td>
-                <input type="text" id="name" name="name"/> <br/>
-            </td>
-        </tr>
-        <tr>
-            <th>전화번호  </th>
-
-            <td>
-                <input type="text" id="phone" name="phone"/> <br/>
-            </td>
-        </tr>
-        <tr>
-            <th>이메일  </th>
-
-            <td>
-                <input type="text" id="email" name="email"/> <br/>
-            </td>
-        </tr>
-        <tr>
-            <th>프로필 사진  </th>
-
-            <td>
-                <input onchange="onChangeImg( this )" type="file" id="img" name="img" accept="image/*" /> <br/>
-            </td>
-        </tr>
-        <tr>
-            <th>미리보기</th>
-            <td>
-                <img id="preimg" src="/img/default.jpg" />
-            </td>
-        </tr>
-        <tr>
-            <th><a href="/member/login">로그인</a></th>
-            <td>
-                <button type="button" onclick="signup()">회원가입</button> <br/>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <button type="button" onclick="signup(  )">회원가입</button>
+    <a href="/member/login">로그인</a>
+    <!--    </div>-->
 </form>
-
-    <script src="/js/member.js"></script>
-    <!-- {resources/static}생략 /js/member.js -->
+<script src="/js/member.js"></script>   <!-- {resources/static} /js/member.js -->
 {{>ezenweb/footer}}
 
