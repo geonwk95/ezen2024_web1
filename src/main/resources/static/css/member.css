@@ -1,0 +1,111 @@
+
+
+/* 전체 폼 */
+.signUpForm{
+    width: 50%;
+    margin: 0 auto;
+}
+/* 상단 제목 */
+.signUpForm > h1 , .signUpForm > p{
+    text-align: center;
+    margin: 10px;
+}
+/* 입력상자 */
+.signUpForm input{
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid rgb(83, 83, 83);
+    border-radius: 20%;
+}
+/* 입력제목 */
+.signUpForm > .label{
+    font-size: 16px;
+    margin: 10px 0;
+}
+/* 체크박스 */
+.signUpForm > .checkbox{
+    color: coral;
+    font-size: 14px;
+    margin: 10px 0px 10px 10px;
+    height: 20px;
+}
+/* 이메일 입력+요청 구역 */
+.signUpForm > .emailbox{
+    display: flex;
+}
+.signUpForm > .emailbox button, .signUpForm > .authbox button{
+    width: 25%;
+    height: 50px;
+    background-color: #75c1cf;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+/* 인증 구역 */
+.signUpForm > .authbox{
+    display: flex;
+    margin: 10px;
+    align-items: center;
+}
+/* 인증 타이머 */
+.signUpForm > .authbox > .timebox{
+    font-size: 20px;
+    width: 30%;
+}
+/* 이미지 미리보기 구역 */
+.signUpForm > .preimgbox{
+    text-align: center;
+    
+}
+.signUpForm > .preimgbox > #preimg{
+    border: 1px solid #e8e8e8;
+    border-radius: 50%;
+    width: 200px;
+    height: 200;
+    object-fit: cover;
+}
+/* 회원가입 버튼 */
+.signUpForm > .signUpbtn{
+    width: 100%;
+    height: 50px;
+    border: none;
+    background-color: #75c1cf;
+    color: white;
+    font-size: 25px;
+    margin: 20px 0;
+    
+}
+/* 로그인 버튼 */
+#loginbtn2 {
+    text-decoration: none;
+    background-color: #75c1cf;
+    color: white;
+    padding: 10px  288px;
+    font-size: 25px;
+}
+h1{
+    text-align: center;
+}
+/* 로그인 페이지 */
+.loginpage{
+    display: flex;
+    justify-content: center;
+}
+th {
+    font-size: 16px;
+    padding: 10px 50px;
+}
+#logpagesign{
+    text-decoration: none;
+    color: black;
+    background-color: #75c1cf;
+}
+#trrotorRL{
+    text-align: center;
+}
+
+
+

@@ -23,20 +23,20 @@ public class EmailService {
     @Autowired
     private JavaMailSender javaMailSender; // 밖으로 뺀이유 다른함수에서도 사용할려고
 
-    public void send() {
+    public void send( String toEmail , String subject , String content ) {
         try {
             // ★ 메일 내용물들을 포맷하기 위한 MIME 형식 객체
             MimeMessage message = javaMailSender.createMimeMessage();
             // 1. 메일 기본 구성 // MimeMessageHelper( mime객체 , 첨부파일여부 , 인코딩타입 ); : 내용물 구성
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true, "UTF-8");
             // 2. 메일 보내는 사람
-            mimeMessageHelper.setFrom(""); // 관리자 이메일
+            mimeMessageHelper.setFrom("geonwk95@naver.com"); // 관리자 이메일
             // 3. 메일 받는 사람
-            mimeMessageHelper.setTo(""); // 클라이언트(회원) 이메일(매개변수)
+            mimeMessageHelper.setTo( toEmail ); // 클라이언트(회원) 이메일(매개변수)
             // 4. 메일 제목
-            mimeMessageHelper.setSubject("자바에서 보낸 메일"); // (매개변수)
+            mimeMessageHelper.setSubject( subject ); // (매개변수)
             // 5. 메일 내용
-            mimeMessageHelper.setText("하이 준영쓰"); // (매개변수)
+            mimeMessageHelper.setText( content ); // (매개변수)
             // ★ 메일 전송
             javaMailSender.send(message);
         } catch (Exception e) {

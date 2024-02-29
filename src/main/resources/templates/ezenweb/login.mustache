@@ -1,24 +1,17 @@
 {{>ezenweb/header}}
+    <div class="container">
+        <div class ="signUpForm">
 
-    <h1>로그인 페이지</h1>
-    <table>
-        <tbody>
-        <tr>
-            <th>아이디 </th>
-            <td><input type="text" id="id"/> <br/></td>
-        </tr>
-        <tr>
-            <th>비밀번호  </th>
-            <td><input type="text" id="pw"/> <br/></td>
-        </tr>
-        <tr>
-            <th><a href="/member/signup">회원가입</a></th>
-            <td><button type="button" onclick="login()">로그인</button> <br/></td>
-        </tr>
-        </tbody>
-    </table>
+            <h3> 로그인 페이지 </h3>
+            <div>
+                아이디 : <input  type="text" id="id"/> <br/>
+                비밀번호 : <input type="text" id="pw"/> <br/>
+                <a href="/member/signup">회원가입</a>
+                <button id="loginbtn2" type="button" onclick="login()">로그인</button>
+            </div>
 
+        </div>
 
+    </div>
     <script src="/js/member.js"></script>
-    <!-- {resources/static}생략 /js/member.js -->
-    {{>ezenweb/footer}}
+{{>ezenweb/footer}}

@@ -148,18 +148,134 @@ function phonecheck(){
     } 
     document.querySelector('.phonecheckbox').innerHTML = msg;
 }
-// 8. 이메일 유효성 검사 : 문자@문자.문자
+
+// 8. 이메일 유효성 검사 : 문자@문자.문자 , 인증을 통한 검토
 function emailcheck(){
     let email = document.querySelector('#email').value;
     let 이메일정규표현식 = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+\.[a-zA-z]+$/
     let msg = "아이디@도메인 입력해줘";
     checkArray[4] = false;
+    authreqbtn.disabled = true;
     if ( 이메일정규표현식.test(email) ) {
-        msg = "통과";
-        checkArray[4] = true;    
+        authreqbtn.disabled = false;
+        
     }
     document.querySelector('.emailcheckbox').innerHTML = msg;
 }
+
+
+
+
+let timer = 0; // 인증 시간
+// 1. 인증 구역
+let authbox = document.querySelector('.authbox');
+// - 인증요청 버튼
+let authreqbtn = document.querySelector('.authreqbtn');
+
+// 9. 인증요청
+function authreq( object ){
+    console.log('authreq()');
+    
+    // 2. 인증 구역 구성
+    let html = `<span class="timebox"></span>
+                <input type="text" class="ecodeinput" />
+                <button type="button" onclick="auth()"> 인증 </button>
+                `;
+    // 3. 인증 구역 출력
+    authbox.innerHTML = html;  
+    
+    // ========= 자바에게 인증 요청 ========= //
+    $.ajax({
+        url : '/auth/email/req',
+        method : 'GET',
+        data : { "email" : document.querySelector('#email').value } ,
+        success : (result) => {
+            if ( result ) {
+                // 4. 타이머 함수 설정
+                timer = 100; // 인증시간 대입
+                ontimer();
+                console.log( authreqbtn );
+
+                // 해당 버튼 사용 금지
+                authreqbtn.disabled = true;
+            }else{
+                alert('관리자 에게 문의');
+            }
+        }
+     });
+     
+    // ===================================== //
+
+
+    
+
+}
+
+// 10. 타이머 함수
+let timerInter = null;
+// // 테스트
+//     // setInterval( 함수 , 밀리초 ); : 특정 밀리초 마다 함수 실행
+//     // 종료 : clearInterval( Interval변수 ); : 종료할 Interval의 변수 대입
+function ontimer(){
+    timerInter = setInterval( () => {
+
+    // 1. timer 를 분/초 로 변환
+    let m = parseInt( timer / 60 ); // 분
+    let s = parseInt( timer % 60 ); // 분 제외한 초
+
+    // 2. 시간을 두 자릿수로 표현
+    m = m < 10 ? "0"+m : m ;    // ex : 8분 -> 08분
+    s = s < 10 ? "0"+s : s ;    // ex : 3초 -> 03초
+
+    // 3. 시간 출력
+    document.querySelector('.timebox').innerHTML = `${m}:${s}`;
+
+    // 4. 시간 감소
+    timer--;
+
+    // 5. 만약에 타이머가 0보다 작아지면
+    if( timer < 0 ){ 
+        clearInterval( timerInter );
+        authbox.innerHTML = `재 인증 해주세요`; // 인증 구역 없애기
+        authreqbtn.disabled = false; // 해당버튼 사용
+    }
+
+} , 1000 );
+}
+
+// 11. 인증 함수
+function auth(){
+
+    // 1. 내가 입력한 인증번호
+    let ecodeinput = document.querySelector('.ecodeinput').value;
+
+    // ============= 내가 입력한 인증번호를 자바에게 보내기 ============= //
+    $.ajax({
+        url : '/auth/email/check',
+        method : 'GET',
+        data : { 'ecodeinput' : ecodeinput } ,
+        success : (result) => {
+            
+    // 3. 인증 성공시 / 실패시
+    if( result ){
+        checkArray[4] = true;  
+        document.querySelector('.emailcheckbox').innerHTML = "통과";  
+        clearInterval( timerInter );
+        authbox.innerHTML = ``; // 인증 구역 없애기
+        authreqbtn.disabled = false; // 해당버튼 사용
+    }else{
+        alert('인증번호가 다릅니다')
+    }
+}
+});
+
+    // ================================================================ //
+}
+
+    
+
+
+
 
 // 1. 회원가입
 function signup(){

@@ -14,7 +14,7 @@
         4. 세션 객체의 속성들을 초기화
         request.getSession().invalidate( "key" , null );
         5. 세션 객체의 속성들의 데이터 생명주기
-        request.getSession().setMaxInactiveInterval( 생명시간 );
+        request.getSession().setMaxInactiveInterval( 생명시간 ); // 초단위
 ======================================================================
 VS
 쿠키 : 클라이언트( 브라우저 ) 에 저장소
