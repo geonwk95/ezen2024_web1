@@ -18,7 +18,7 @@ public class FileService {
 
     // 1. 업로드 메소드
     public String fileUpload( MultipartFile multipartFile ){
-        // 확인 : 첨푸파일 MultipartFile 타입
+        // 확인 : 첨부파일 MultipartFile 타입
         MultipartFile 첨부파일 = multipartFile;
         System.out.println( 첨부파일 );              // 첨부파일이 들어있는 객체 주소
         System.out.println( 첨부파일.getSize() );   // 첨부파일 용량 : 5553
