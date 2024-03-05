@@ -3,10 +3,13 @@ package ezenweb.controller;
 import ezenweb.Service.BoardService;
 import ezenweb.Service.MemberService;
 import ezenweb.model.dto.BoardDto;
+import ezenweb.model.dto.BoardPageDto;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/board") // 공통 URL
@@ -39,7 +42,13 @@ public class BoardController {
         return boardService.doPostBoardWrite( boardDto );
     }
     // 2. 전체 글 출력 호출       get      x
+    @GetMapping("/do")  // (쿼리스트링)매개변수 : 현제페이지
+    @ResponseBody
+    public BoardPageDto doGetBoardViewList(int page ){
+        System.out.println("BoardController.doGetBoardViewList");
 
+        return boardService.doGetBoardViewList( page );
+    }
     // 3. 개별 글 출력 호출       get    게시물번호     dto
     @GetMapping("/view.do")
     @ResponseBody
