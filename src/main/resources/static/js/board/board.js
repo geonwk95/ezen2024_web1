@@ -1,13 +1,24 @@
+// ========= 페이지 정보 관련 객체 = 여러개 변수 묶음 ============= //
+let pageObject = {
+    page : 1 ,              // 현제 페이지
+    pageBoardSize : 5 ,     // 현재 페이지당 표시할 게시물 수
+    bcno : 0 ,              // 현재 카테고리
+    key : 'b.btitle' ,      // 현재 검색 key
+    keyword : '' ,        // 현재 검색 keyword
+}
 
 // 1. 전체 출력용 : 함수 : 매개변수 = page , 반환 x , 언제 실행할껀지 : 페이지 열릴때(JS)
 doViewList( 1 ); // 첫페이지 실행
 function doViewList( page ){
     console.log("doViewList()");
 
+    pageObject.page = page; // 매개변수로 들어온 페이지를 현재페이지에 대입
+
+
     $.ajax({
        url : '/board/do',
        method : 'GET',
-       data : { 'page' : page } ,
+       data : pageObject ,
        success : ( result ) => {
             console.log(result);
             // 테이블 레코드 구성
@@ -20,7 +31,7 @@ function doViewList( page ){
                     console.log( board );
                 html += `            <tr>
                                          <th>${board.bno}</th>
-                                         <td>${board.btitle}</td>
+                                         <td><a href="/board/view?bno=${board.bno}">${board.btitle}</a> </td>
                                          <td><img src="/img/${board.img}" style="width:20px; border-radius:50%;"/>${board.id}</td>
                                          <td>${board.bdate}</td>
                                          <td>${board.bview}</td>
@@ -47,7 +58,63 @@ function doViewList( page ){
             // 3. 출력
             pagination.innerHTML = pagehtml;
 
+            // == 부가 출력 ========================
+            document.querySelector('.totalPage').innerHTML = result.totalPage;
+            document.querySelector('.totalBoardSize').innerHTML = result.totalBoardSize;
        } // success end
     }); // ajax end
     return;
+} // f end
+
+// 2. 페이지당 게시물 수
+function onPageBoardSize( object ){
+    console.log("onPageBoardSize()");
+    console.log( object );
+    console.log( object.value );
+
+    pageObject.pageBoardSize = object.value;
+    doViewList( 1 );
+}
+
+// 3. 카테고리 변경 함수
+function onBcno( bcno ){
+    // bcno : 카테고리 식별번호 [ 0 : 전체 , 1 : 자유 , 2 : 노하우 ]
+    pageObject.bcno = bcno;
+    doViewList(1);
+    // 검색 제거 ( 검색이 없다는 기준 데이터 )
+    pageObject.key = 'b.btitle';
+    pageObject.keyword = '';
+    document.querySelector('.key').value = 'b.btitle';
+    document.querySelector('.keyword').value = '';
+
+
+    // 카테고리 활성화 css 적용 ( 해당 버튼에 categoryActive 클래스 대입 )
+    // 1. 모든 카테고리 버튼 호출
+    let categoryBtns = document.querySelectorAll(".boardCategoryBox > button");
+    console.log( categoryBtns );
+    // 2. 선택된 카테고리번호(매개변수bcno) 에 class 대입
+        // dom객체.classList.add("새로운 클래스명")
+        // dom객체.classList.remove("제거할 클래스명")
+
+        // 1. 활성화 초기화
+    for( let i = 0 ; i < categoryBtns.length ; i++ ){
+        categoryBtns[i].classList.remove("categoryActive");
+    }
+        // 2. 활성화 대입
+    categoryBtns[bcno].classList.add("categoryActive")
+    // 재출력
+    doViewList(1);
+}
+
+// 4. 검색 함수
+function onSearch(){
+    console.log('onSearch()');
+    // 1. 입력받은 값 가져오기
+    let key = document.querySelector('.key').value;
+    let keyword = document.querySelector('.keyword').value;
+    // 2. 서버에 전송할 객체에 담아주고
+    pageObject.key = key;
+    pageObject.keyword = keyword;
+    // 3. 출력 함수 호출
+    doViewList( 1 );
 }

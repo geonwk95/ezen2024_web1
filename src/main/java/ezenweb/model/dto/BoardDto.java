@@ -18,7 +18,7 @@ public class BoardDto {
     private String bdate;          // 작성일
     private long no;              // 작성자 번호
     private long bcno;             // 카테고리
-    MultipartFile uploadfile; // 실제 첨부파일 [ DB처리X , 서버에 저장 ]
+    private MultipartFile uploadfile; // 실제 첨부파일 [ DB처리X , 서버에 저장 ]
 
     private String id;
     private String img;

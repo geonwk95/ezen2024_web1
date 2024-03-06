@@ -36,26 +36,26 @@ public class BoardService {
         return boardDao.doPostBoardWrite( boardDto );
     }
     // 2. 전체 글 출력 호출
-    public BoardPageDto doGetBoardViewList( int page ){
+    public BoardPageDto doGetBoardViewList( int page , int pageBoardSize , int bcno , String field , String value ){
         System.out.println("BoardService.doGetBoardViewList");
 
         // 페이지 처리시 사용할 SQL 구문 : limit 시작레코드번호(0부터) , 출력개수
 
         // 1. 페이지당 게시물을 출력할 개수  [ 출력개수 ]
-        int pageBoardSize = 2;
+        // int pageBoardSize = 5;
 
         // 2. 페이지당 게시물을 출력할 시작 레코드번호    [ 시작레코드번호(0부터) ]
-        int startRow = (page-1) * pageBoardSize;
+        int startRow = ( page - 1 ) * pageBoardSize;
 
-        // 3. 총 페이지수
+        // 3. 총 페이지수 ( 페이지네이션 사용할 페이지버튼 만들려고 총페이지 수 구하기 )
             // 3-1 전체 게시물수
-        int totalBoardSize = boardDao.getBoardSize();
+        int totalBoardSize = boardDao.getBoardSize( bcno , field , value  );
             // 3-2 총 페이지수 계산 ( 나머지값이 존재하면 +1 아니면 그냥 진행 )
         int totalPage = totalBoardSize % pageBoardSize == 0 ?
                         totalBoardSize / pageBoardSize :
                         (totalBoardSize / pageBoardSize)+1 ;
         // 4. 게시물 정보 요청
-        List<BoardDto> list = boardDao.doGetBoardViewList( startRow , pageBoardSize );
+        List<BoardDto> list = boardDao.doGetBoardViewList( startRow , pageBoardSize , bcno , field , value );
 
 
         // 5. 페이징 버튼 개수
@@ -70,17 +70,37 @@ public class BoardService {
             endBtn = totalPage;
         }
 
-        // pageDto 구성
-        BoardPageDto boardPageDto = new BoardPageDto(
-                page , totalPage , startBtn , endBtn , list
-                );
+        // pageDto 구성 * 빌더패턴 : 생성자의 단점( 매개변수에 따른 유연성 부족 ) 을 보완
 
+//        BoardPageDto boardPageDto = new BoardPageDto(
+//                page , totalPage , startBtn , endBtn , list ,
+//                );
+                    // VS
+            // new 연산자 없이 builder() 함수 이용한 객체 생성 라이브러리 제공
+            // 사용방법 : 클래스명.builder().필드명(대입값).필드명(대입값).build();
+            // * 생성자 보단 유연성 UP : 매개변수의 순서 와 개수 자유롭다
+        BoardPageDto boardPageDto = BoardPageDto.builder()
+                .page( page )
+                .totalBoardSize( totalBoardSize )
+                .list( list )
+                .startBtn( startBtn )
+                .endBtn( endBtn )
+                .totalPage( totalPage )
+                .build();
+                    // VS
+//        BoardPageDto boardPageDto = new  BoardPageDto();
+//        boardPageDto.setPage(page);
+//        boardPageDto.setTotalBoardSize(totalBoardSize);
         return boardPageDto;
     }
     // 3. 개별 글 출력 호출
 
-    public BoardDto doGetBoardView( long bno ){
+    public BoardDto doGetBoardView( int bno ){
         System.out.println("BoardService.doGetBoardView");
+
+        // 조회수 처리
+        boardDao.boardViewIncrease( bno );
+
         return boardDao.doGetBoardView( bno );
     }
     // 4. 글 수정 처리

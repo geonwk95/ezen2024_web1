@@ -43,18 +43,18 @@ public class BoardController {
     }
     // 2. 전체 글 출력 호출       get      x
     @GetMapping("/do")  // (쿼리스트링)매개변수 : 현제페이지
-    @ResponseBody
-    public BoardPageDto doGetBoardViewList(int page ){
+    @ResponseBody       // @RequestParam : 쿼리스트링
+    public BoardPageDto doGetBoardViewList(@RequestParam int page , @RequestParam int pageBoardSize , @RequestParam int bcno , @RequestParam("key") String field , @RequestParam("keyword") String value ){
         System.out.println("BoardController.doGetBoardViewList");
 
-        return boardService.doGetBoardViewList( page );
+        return boardService.doGetBoardViewList( page , pageBoardSize , bcno , field , value  );
     }
     // 3. 개별 글 출력 호출       get    게시물번호     dto
     @GetMapping("/view.do")
     @ResponseBody
-    public BoardDto doGetBoardView( @RequestParam long bno ){
+    public BoardDto doGetBoardView( @RequestParam int bno  ){
         System.out.println("BoardController.doGetBoardView");
-        return boardService.doGetBoardView( bno );
+        return boardService.doGetBoardView( bno  );
     }
     // 4. 글 수정 처리           put     Dto
 

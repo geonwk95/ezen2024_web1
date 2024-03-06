@@ -1,7 +1,32 @@
 {{>ezenweb/header}}
     <div class="container">
         <h3>게시판</h3>
-        <a href="/board/write">글쓰기</a>
+
+        <div class="boardTopEtc">
+            <div>
+                <select class="pageBoardSize boardBtn" onchange="onPageBoardSize( this )">
+                    <option class="boardBtnFont" value="5">5</option>
+                    <option class="boardBtnFont" value="10">10</option>
+                    <option class="boardBtnFont" value="15">15</option>
+                </select>
+        전체 페이지 : <span class="totalPage"></span>
+        전체 게시물 : <span class="totalBoardSize"></span>
+            </div>
+            <a href="/board/write" class="boardBtn">글쓰기</a>
+        </div>
+
+        
+
+        
+
+        <div class="boardCategoryBox">
+            <button class="boardBtn categoryActive" onclick="onBcno(0)" type="button">전체보기</button>
+            <button class="boardBtn" onclick="onBcno(1)" type="button">자유</button>
+            <button class="boardBtn" onclick="onBcno(2)" type="button">노하우</button>
+        </div>
+
+
+
 
         <table class="table table-striped table-hover">
             <thead>
@@ -10,7 +35,7 @@
                 <th scope="col" style="width:40%">제목</th>
                 <th scope="col" style="width:15%">작성자</th>
                 <th scope="col" style="width:35%">작성일</th>
-                <th scope="col" style="width:5%">조회수</th>
+                <th scope="col" onchange="onBview( this )" style="width:5%">조회수</th>
             </tr>
             </thead>
             <tbody id="boardTableBody">
@@ -22,10 +47,20 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
 
-
+            <!-- JS 페이지버튼이 들어갈 자리 -->
 
             </ul>
         </nav>
+
+        <div class="boardSearchBox" id="searchbox"> <!-- 검색창 -->
+            <select class="key boardBtn"> <!-- 검색 key : SQL 검색시 사용할 필드명 -->
+                <option class="boardBtnFont" value="b.btitle">제목</option>
+                <option class="boardBtnFont" value="b.bcontent">내용</option>
+                <option class="boardBtnFont" value="m.id">작성자</option>
+            </select>
+            <input type="text" class="keyword" /> <!-- 검색 keyword : SQL 검색시 사용할 필드의 값 -->
+            <button class="boardBtn" onclick="onSearch()" type="button">검색</button>
+        </div>
     </div>
 <script src="/js/board/board.js"></script>
 {{>ezenweb/footer}}
