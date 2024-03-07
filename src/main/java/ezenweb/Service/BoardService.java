@@ -104,6 +104,31 @@ public class BoardService {
         return boardDao.doGetBoardView( bno );
     }
     // 4. 글 수정 처리
+    public boolean doUpdateBoard( int bcno , String btitle , String bcontent , int bno ){
+        System.out.println("BoardService.doUpdateBoard");
+        System.out.println("bcno = " + bcno + ", btitle = " + btitle + ", bcontent = " + bcontent + ", bno = " + bno);
+
+        return boardDao.doUpdateBoard( bcno , btitle , bcontent , bno );
+    }
 
     // 5. 글 삭제 처리
+    public boolean doDeleteBoard( int bno ){
+        System.out.println("BoardService.doDeleteBoard");
+        System.out.println("bno = " + bno);
+
+        // - 레코드 삭제 하기전에 삭제할 첨부파일명을 임시로 꺼내둔다
+        String bfile = boardDao.doGetBoardView( bno ).getBfile();
+
+        // 1. Dao 처리
+        boolean result = boardDao.doDeleteBoard( bno );
+
+        // 2. Dao 처리 성공시 첨부파일도 삭제
+        if( result ){
+            // 기존에 첨부파일이 있었으면
+            if ( bfile != null ){
+                fileService.fileDelete( bfile ); // 미리 꺼내둔 삭제할 첨부파일명을 대입한다
+            }
+        }
+        return result;
+    }
 }

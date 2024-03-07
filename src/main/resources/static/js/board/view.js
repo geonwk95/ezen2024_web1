@@ -1,4 +1,3 @@
-
 // * 경로(URL)상 의 쿼리스트링(매개변수) 호출하기
     // 1. new URL( location.href ) : 현제 페이지의 경로객체 호출
 console.log( new URL( location.href ) );
@@ -23,7 +22,22 @@ function onView(){
             document.querySelector('.no').innerHTML = result.no
             document.querySelector('.bdate').innerHTML = result.bdate
             document.querySelector('.bview').innerHTML = result.bview
-            document.querySelector('.bfile').innerHTML = result.bfile
+            /* 다운로드 링크 */
+            document.querySelector('.bfile').innerHTML = `<a href="/board/file/download?bfile=${ result.bfile }"/>${ result.bfile };`
+            document.querySelector('.btnBox').innerHTML = `<button type="button" onclick="onDelete( ${result.bno} )">삭제</button>`
         }
     });
 }
+
+// 2. 게시물 삭제 함수
+function onDelete( bno ){
+    $.ajax({
+            url : "/board/delete.do" ,
+            method : "delete" ,
+            data : { "bno" : bno } ,      // 쿼리 스트링
+            success : (result) => {
+                if( result ){ alert('삭제성공'); location.href="/board" }
+                else{ alert('삭제실패') }
+            }
+        }); // ajax and
+} // f end

@@ -1,6 +1,7 @@
 package ezenweb.controller;
 
 import ezenweb.Service.BoardService;
+import ezenweb.Service.FileService;
 import ezenweb.Service.MemberService;
 import ezenweb.model.dto.BoardDto;
 import ezenweb.model.dto.BoardPageDto;
@@ -20,6 +21,8 @@ public class BoardController {
     private HttpServletRequest request;
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private FileService fileService;
     // 1. 글쓰기 처리            post    Dto     true / false
     @PostMapping("/write.do")
     @ResponseBody
@@ -57,8 +60,34 @@ public class BoardController {
         return boardService.doGetBoardView( bno  );
     }
     // 4. 글 수정 처리           put     Dto
+    @PutMapping("/update.do")
+    @ResponseBody
+    public boolean doUpdateBoard( @RequestParam int bcno , @RequestParam String btitle , @RequestParam String bcontent , @RequestParam int bno ){
+        System.out.println("BoardController.doUpdateBoard");
+        System.out.println("bcno = " + bcno + ", btitle = " + btitle + ", bcontent = " + bcontent + ", bno = " + bno);
 
+        return boardService.doUpdateBoard( bcno , btitle , bcontent , bno );
+    }
     // 5. 글 삭제 처리           delete  게시물번호
+    @DeleteMapping("/delete.do")
+    @ResponseBody
+    public boolean doDeleteBoard( @RequestParam int bno ){
+        System.out.println("BoardController.doDeleteBoard");
+        System.out.println("bno = " + bno);
+
+        return boardService.doDeleteBoard( bno );
+    }
+    // 6. 다운로드 처리 ( 함수만들때 고민할점 1. 매개변수 : 파일명 2. 반환 : 3. 사용처 : get http요청 )
+    @GetMapping("/file/download")
+    @ResponseBody
+    public void getBoardFileDownload( @RequestParam String bfile ){
+        System.out.println("BoardController.getBoardFileDownload");
+        System.out.println("bfile = " + bfile);
+
+        fileService.fileDownload( bfile );
+
+        return;
+    }
 
     // ======================== 머스테치는 컨트롤에서 뷰 반환 ========================= //
 

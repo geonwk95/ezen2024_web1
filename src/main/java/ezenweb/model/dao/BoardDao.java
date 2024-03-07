@@ -2,6 +2,7 @@ package ezenweb.model.dao;
 
 import ezenweb.model.dto.BoardDto;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -156,6 +157,72 @@ public class BoardDao extends Dao{
         }
     }
     // 4. 글 수정 처리
+    public boolean doUpdateBoard( int bcno , String btitle , String bcontent , int bno ){
+        System.out.println("BoardDao.doUpdateBoard");
+        System.out.println("bcno = " + bcno + ", btitle = " + btitle + ", bcontent = " + bcontent + ", bno = " + bno);
+        try {
+            String sql = "update board set  bcno = ? , btitle = ? , bcontent = ? where bno = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1 , bcno );
+            ps.setString(2 , btitle);
+            ps.setString(3 , bcontent);
+            ps.setInt(4 , bno);
+            int count = ps.executeUpdate();
+            if ( count == 1 ) return true;
+        }catch ( Exception e ){
+            System.out.println("e = " + e);
+        }
+        return false;
+    }
 
     // 5. 글 삭제 처리
+    public boolean doDeleteBoard( int bno ){
+        System.out.println("BoardDao.doDeleteBoard");
+        System.out.println("bno = " + bno);
+        try {
+            String sql = "delete from board where bno = " + bno;
+            ps = conn.prepareStatement(sql);
+            int count = ps.executeUpdate();
+            if ( count == 1 ) return true;
+        }catch ( Exception e ){
+            System.out.println("e = " + e);
+        }
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
