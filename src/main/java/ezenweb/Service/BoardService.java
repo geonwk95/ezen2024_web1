@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BoardService {
@@ -104,11 +105,33 @@ public class BoardService {
         return boardDao.doGetBoardView( bno );
     }
     // 4. 글 수정 처리
-    public boolean doUpdateBoard( int bcno , String btitle , String bcontent , int bno ){
+    public boolean doUpdateBoard( BoardDto boardDto ){
         System.out.println("BoardService.doUpdateBoard");
-        System.out.println("bcno = " + bcno + ", btitle = " + btitle + ", bcontent = " + bcontent + ", bno = " + bno);
+        System.out.println("boardDto = " + boardDto);
 
-        return boardDao.doUpdateBoard( bcno , btitle , bcontent , bno );
+        // 1. 기존 첨부파일명 구하고
+        String bfile = boardDao.doGetBoardView( (int)boardDto.getBno()).getBfile();
+
+        // - 새로운 첨부파일이 있다? 없다? 판단해야한다
+        if ( !boardDto.getUploadfile().isEmpty() ){ // 수정시 새로운 첨부파일이 있으면
+
+            // 새로운 첨부파일을 업로드 하고 기존 첨부파일을 삭제
+            String fileName = fileService.fileUpload(boardDto.getUploadfile() );
+            if ( fileName != null ){ // 업로드 성공
+                boardDto.setBfile( fileName );  // 새로운 첨부파일의 이름 dto 대입
+                // 기존 첨부파일 삭제
+
+                    // 2. 기존 첨부파일명 삭제
+                fileService.fileDelete( bfile );
+            }else {
+                return false;
+            }
+        }else {
+            // 업로드 할 필요 없다
+            boardDto.setBfile( bfile ); // 새로운 첨부파일이 없으면 기존 첨부파일명을 그대로 대입
+        }
+
+        return boardDao.doUpdateBoard( boardDto );
     }
 
     // 5. 글 삭제 처리
@@ -131,4 +154,24 @@ public class BoardService {
         }
         return result;
     }
+
+    // 6. 작성자 인증
+    public boolean boardWriterAuth( long bno , String mid ){
+
+        return boardDao.boardWriterAuth( bno , mid );
+    }
+
+    // 7. 댓글 작성 ( brcontent , brindex , brdate , mno )
+    public boolean postReplyWrite( Map< String , String > map ){
+        System.out.println("BoardController.postReplyWrite");
+        System.out.println("map = " + map);
+
+        return boardDao.postReplyWrite( map );
+    }
+    // 8. 댓글 출력     댓글( brno , brcontent , brdate , brindex , mno ) , 매개변수 : bno
+    public List< Map<String , String> > getReplyDo( int bno ){
+        System.out.println("BoardController.getReplyDo");
+        return boardDao.getReplyDo( bno );
+    }
+
 }

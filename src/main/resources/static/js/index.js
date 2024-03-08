@@ -1,6 +1,6 @@
 // 모든페이지에서 적용할 공통 JS
 
-// 1. 로그인 여부 확인 요청
+// 1. 로그인 여부 확인 요청 [ JS 열렸을때 마다 ]
 $.ajax({
    url : '/member/login/check',
    method : 'GET',

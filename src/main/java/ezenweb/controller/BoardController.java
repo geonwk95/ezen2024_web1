@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/board") // 공통 URL
@@ -62,11 +63,24 @@ public class BoardController {
     // 4. 글 수정 처리           put     Dto
     @PutMapping("/update.do")
     @ResponseBody
-    public boolean doUpdateBoard( @RequestParam int bcno , @RequestParam String btitle , @RequestParam String bcontent , @RequestParam int bno ){
+    public boolean doUpdateBoard( BoardDto boardDto ){
         System.out.println("BoardController.doUpdateBoard");
-        System.out.println("bcno = " + bcno + ", btitle = " + btitle + ", bcontent = " + bcontent + ", bno = " + bno);
+        System.out.println("boardDto = " + boardDto);
+        // 유효성검사
+            // 1. 현재 로그인된 아이디 ( 세션 )
+        Object object = request.getSession().getAttribute("loginDto");
+        if ( object != null ){
+            String mid = (String)object;
+            // 해당 세션정보가 작성한 글 인지 체크
+            boolean result = boardService.boardWriterAuth( boardDto.getBno() , mid );
+            if ( result ){
+                // 2. 현재 수정할 게시물의 작성자 아이디( DB )
+                return boardService.doUpdateBoard( boardDto );
+            }
+            // 2. 현재 수정할 게시물의 작성자 아이디( DB )
 
-        return boardService.doUpdateBoard( bcno , btitle , bcontent , bno );
+        }
+        return false;
     }
     // 5. 글 삭제 처리           delete  게시물번호
     @DeleteMapping("/delete.do")
@@ -74,8 +88,19 @@ public class BoardController {
     public boolean doDeleteBoard( @RequestParam int bno ){
         System.out.println("BoardController.doDeleteBoard");
         System.out.println("bno = " + bno);
-
-        return boardService.doDeleteBoard( bno );
+        // 유효성검사
+            // 1. 현재 로그인된 아이디 ( 세션 )
+            Object object = request.getSession().getAttribute("loginDto");
+            if ( object != null ){
+                String mid = (String)object;
+                // 해당 세션정보가 작성한 글 인지 체크
+                boolean result = boardService.boardWriterAuth( bno , mid );
+                if ( result ){
+                    // 2. 현재 수정할 게시물의 작성자 아이디( DB )
+                    return boardService.doDeleteBoard( bno );
+                }
+        }
+        return false;
     }
     // 6. 다운로드 처리 ( 함수만들때 고민할점 1. 매개변수 : 파일명 2. 반환 : 3. 사용처 : get http요청 )
     @GetMapping("/file/download")
@@ -83,10 +108,34 @@ public class BoardController {
     public void getBoardFileDownload( @RequestParam String bfile ){
         System.out.println("BoardController.getBoardFileDownload");
         System.out.println("bfile = " + bfile);
-
         fileService.fileDownload( bfile );
-
         return;
+    }
+
+    // 7. 댓글 작성 ( brcontent , brindex , brdate , mno )
+    @PostMapping("/reply/write.do")
+    @ResponseBody
+    public boolean postReplyWrite( @RequestParam Map< String , String > map ){
+        System.out.println("BoardController.postReplyWrite");
+        System.out.println("map = " + map);
+        // 작성자(회원번호)
+        // 1. 현재 로그인된 세션(브라우저 마다 톰캣서버(자바프로그램) 메모리(JVM) 저장소) 호출
+        Object object = request.getSession().getAttribute("loginDto");
+        if ( object == null ) return false; // 세션없다(로그인안했다)
+        // 2. 형변환
+        String mid = (String)object;
+        // 3. mid를 mno 찾아오기
+        long mno = memberService.doGetLoginInfo( mid ).getNo();
+        // 4. map에 mno 넣기
+        map.put( "mno" , mno+"" );
+        return boardService.postReplyWrite( map );
+    }
+    // 8. 댓글 출력     댓글( brno , brcontent , brdate , brindex , mno ) , 매개변수 : bno
+    @GetMapping("/reply/do")
+    @ResponseBody
+    public List< Map< String , String> > getReplyDo( int bno ){
+        System.out.println("BoardController.getReplyDo");
+        return boardService.getReplyDo( bno );
     }
 
     // ======================== 머스테치는 컨트롤에서 뷰 반환 ========================= //
@@ -107,6 +156,9 @@ public class BoardController {
         return "ezenweb/board/view";
     }
     // 4. 글수정 페이지 이동
-
+    @GetMapping("/update")
+    public String getBoardUpdate(){
+    return "ezenweb/board/update";
+}
 
 } // class end
