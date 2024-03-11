@@ -169,7 +169,7 @@ public class BoardService {
         return boardDao.postReplyWrite( map );
     }
     // 8. 댓글 출력     댓글( brno , brcontent , brdate , brindex , mno ) , 매개변수 : bno
-    public List< Map<String , String> > getReplyDo( int bno ){
+    public List< Map<String , Object> > getReplyDo( int bno ){
         System.out.println("BoardController.getReplyDo");
         return boardDao.getReplyDo( bno );
     }

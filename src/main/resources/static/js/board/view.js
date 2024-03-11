@@ -44,7 +44,7 @@ function onView(){
                         }
                     } // success 2 end
                 }); // ajax 2 end
-
+                onRelyList();
         } // success end
     }); // ajax and
 } // f end
@@ -61,3 +61,77 @@ function onDelete( bno ){
             }
         }); // ajax and
 } // f end
+
+// 3. 댓글 작성
+function onRelyWrite( brindex ){
+    console.log('onRelyWrite()');
+    $.ajax({
+                url : "/board/reply/write.do" ,
+                method : "POST" ,
+                data : { 'bno' : bno ,  // 현재 보고 있는 게시물번호
+                        'brcontent' : document.querySelector(`.brcontent${ brindex }`).value ,
+                         'brindex' : brindex // 댓글 위치 번호 [ 0 : 상위댓글 , 1~ : 하위댓글 ]
+                } ,      // 쿼리 스트링
+                success : (result) => {
+                    console.log(result)
+                    if( result ){
+                        alert('댓글작성성공');
+                        onRelyList();
+                    }else{
+                        alert('댓글작성실패');
+                    }
+                }
+    }); // ajax end
+} // f end
+
+
+// 4. 댓글 출력 (언제 실행되나) : [ 1. 현재 게시물이 출력되었을때 , 2. 댓글작성시 , 3. 댓글삭제 , 4. 댓글수정 ]
+function onRelyList(){
+    $.ajax({
+        url : "/board/reply/do" ,
+        method : 'GET' ,
+        data : { "bno" : bno } ,
+        success : ( result ) => {
+            console.log( result );
+
+            let replyListBox = document.querySelector('.replyListBox');
+            let html = '';
+
+                result.forEach(reply=>{
+                    console.log(reply);
+                    html += `<div>
+                            <span>${ reply.brcontent }</span>
+                            <span>${ reply.mno }</span>
+                            <span>${ reply.brdate }</span>
+                            <button type="button" onclick="subReplyView( ${ reply.brno })"> 답변작성 </button>
+                            <div class="subReplyBox${ reply.brno }"> </div>
+                            ${ onSubRelyList( reply.subReply ) }
+                            <div>` // class 명 뒤에 식별키(pk) 연결
+                });
+            replyListBox.innerHTML = html;
+        }
+    }); // ajax end
+} // f end
+
+// 5. 대 댓글 작성
+function subReplyView( brno ){
+    console.log('subReplyView()');
+    let html = `
+        <textarea class="brcontent${brno}"> </textarea>
+        <button onclick="onRelyWrite( ${brno} )" type="button"> 답변작성 </button>
+    `
+    document.querySelector(`.subReplyBox${ brno }`).innerHTML = html;
+}
+
+// 6. 대 댓글 출력
+function onSubRelyList( subReply ){
+    let subHtml = '';
+    subReply.forEach( (reply) => {
+        subHtml += `<div style="magin-left : 50px;">
+                    <span>${reply.brcontent}</span>
+                    <span>${reply.mno}</span>
+                    <span>${reply.brdate}</span>
+        `
+    });
+    return subHtml;
+}
