@@ -22,7 +22,7 @@ public class BoardDao extends Dao{
         System.out.println("BoardDao.doPostBoardWrite");
         System.out.println("boardDto = " + boardDto);
         try {
-            String sql = "insert into board (btitle , bcontent , bfile , no ,bcno) values(? , ? , ? , ? , ?)";
+            String sql = "insert into board (btitle , bcontent , bfile , mno ,bcno) values(? , ? , ? , ? , ?)";
             ps = conn.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS );
             ps.setString(1 , boardDto.getBtitle());
             ps.setString(2 , boardDto.getBcontent());
@@ -49,7 +49,7 @@ public class BoardDao extends Dao{
         List<BoardDto> list = new ArrayList<>();
         try {
             // SQL 앞 부분
-            String sql = "select * from board b inner join member m on b.no = m.no";
+            String sql = "select * from board b inner join member m on b.mno = m.no";
 
             // SQL 중간 부분 [ 조건에 따라 where 절 추가 ]
             // ======= 1. 만약에 카테고리 조건이 있으면 where 추가 ======= //
@@ -78,7 +78,7 @@ public class BoardDao extends Dao{
                         rs.getString("bfile"),
                         rs.getLong("bview"),
                         rs.getString("bdate"),
-                        rs.getLong("no"),
+                        rs.getLong("mno"),
                         rs.getLong("bcno"),
                         null ,
                         rs.getString("id") ,
@@ -96,7 +96,7 @@ public class BoardDao extends Dao{
     public int getBoardSize( int bcno , String field , String value ){
         System.out.println("bcno = " + bcno + ", field = " + field + ", value = " + value);
         try {
-            String sql = "select count(*) from board b inner join member m on b.no = m.no ";
+            String sql = "select count(*) from board b inner join member m on b.mno = m.no ";
 
             // ======= 1. 만약에 카테고리 조건이 있으면 where 추가 ======= //
             if( bcno > 0 ){ sql += " where b.bcno = " + bcno ;}
@@ -126,7 +126,7 @@ public class BoardDao extends Dao{
         System.out.println("BoardDao.doGetBoardView");
         BoardDto boardDto = null;
         try {
-            String sql = "select * from board b inner join member m on b.no = m.no where b.bno = ?";
+            String sql = "select * from board b inner join member m on b.mno = m.no where b.bno = ?";
             ps = conn.prepareStatement(sql);
             ps.setLong(1 , bno);
 
@@ -139,7 +139,7 @@ public class BoardDao extends Dao{
                         rs.getString("bfile"),
                         rs.getLong("bview"),
                         rs.getString("bdate"),
-                        rs.getLong("no"),
+                        rs.getLong("mno"),
                         rs.getLong("bcno"),
                         null ,
                         rs.getString("id") ,
@@ -201,7 +201,7 @@ public class BoardDao extends Dao{
     // 6. 게시물 작성자 인증
     public boolean boardWriterAuth( long bno , String mid ){
         try {
-            String sql = "select * from board b inner join member m on b.no = m.no where b.bno = ? and m.id = ?";
+            String sql = "select * from board b inner join member m on b.mno = m.no where b.bno = ? and m.id = ?";
             ps = conn.prepareStatement(sql);
             ps.setLong(1 , bno );
             ps.setString(2 , mid );
