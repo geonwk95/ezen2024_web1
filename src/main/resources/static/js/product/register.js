@@ -8,7 +8,7 @@ function onRegister(){
     // 1. 폼 가져오기
     let productRegisterForm = document.querySelector('.productRegisterForm');
     // 2. 폼 데이터 객체화
-    let productRegisterFormData = new FormData(productRegisterFormData);
+    let productRegisterFormData = new FormData(productRegisterForm);
     // 3. 폼 속성( 위도,경도 ) 추가
         if( lat == 0 || lng == 0 ){
             alert('제품 거래 위치 선택 후 등록 가능합니다')
