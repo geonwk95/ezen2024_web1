@@ -20,7 +20,7 @@ function doViewList( page ){
        method : 'GET',
        data : pageObject ,
        success : ( result ) => {
-            console.log();
+            console.log(result);
             // 테이블 레코드 구성
             // 1. 어디에
             let boardTableBody = document.querySelector("#boardTableBody");
