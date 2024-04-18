@@ -83,7 +83,7 @@ public class MemberDao extends Dao {
     }
 
     // 4 ============ 아이디 중복 체크 요청 ============
-    public boolean doGetFindIdCheck(@RequestParam String id){
+    public boolean doGetFindIdCheck(String id){
         try {
             String sql = "select * from member where id = ?";
             ps = conn.prepareStatement(sql);

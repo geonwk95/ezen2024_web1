@@ -21,7 +21,7 @@ import java.io.IOException;
             2. 서블릿컨테이너에 요청받은 서블릿이 있는지 없는지 판단
             3. 없으면 init() 메소드 실행한 서블릿 생성
             4. 있으면 또는 생성했으면 Thread(작업스레드) 할당
-            5. service() 실행 하고 HTPP 요청 method에 따른 메소드로 이동
+            5. service() 실행 하고 HTTP 요청 method에 따른 메소드로 이동
             6. doXXX 메소드 실행될때 요청(HttpServletRequest) 객체 생성
                 - HTTP 관련된 정보를 요청할수 있는 기능 가지고 있다.
             7. doXXX 메소드 종료될때 응답(HttpServletResponse) 객체 생성

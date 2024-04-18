@@ -52,7 +52,7 @@ public class MemberService {
         return memberDao.doGetLoginInfo(id);
     }
     // 4 ============ 아이디 중복 체크 요청 ============
-    public boolean doGetFindIdCheck(@RequestParam String id){
+    public boolean doGetFindIdCheck( String id ){
         // 1. Dao doGetFindIdCheck 호출
         return memberDao.doGetFindIdCheck( id );
     }
